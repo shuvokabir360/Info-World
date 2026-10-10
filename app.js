@@ -651,8 +651,65 @@ document.addEventListener('DOMContentLoaded', () => {
     photoFrame.style.transform = `perspective(1000px) rotateY(${x * 0.05}deg) rotateX(${-y * 0.05}deg) scale(1.03)`;
   });
 
-  photoFrame.addEventListener('mouseleave', () => {
-    photoFrame.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)';
+  // ===================================================
+  // PWA (PROGRESSIVE WEB APP) & INSTALL PROMPT ENGINE
+  // ===================================================
+  let deferredPrompt = null;
+  const homeInstallBtn = document.getElementById('homeInstallBtn');
+  const settingsInstallBtn = document.getElementById('settingsInstallBtn');
+  const settingsInstallBadge = document.getElementById('settingsInstallBadge');
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((reg) => console.log('Hero PWA ServiceWorker active:', reg.scope))
+        .catch((err) => console.warn('Hero PWA ServiceWorker error:', err));
+    });
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (homeInstallBtn) {
+      homeInstallBtn.classList.add('active');
+    }
+    if (settingsInstallBadge) {
+      settingsInstallBadge.textContent = 'ইনস্টল রেডি';
+    }
+  });
+
+  function triggerPWAInstall() {
+    initAudio();
+    playClickSound();
+
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User installed the Hero app');
+          if (settingsInstallBadge) settingsInstallBadge.textContent = 'ইনস্টল হয়েছে';
+        }
+        deferredPrompt = null;
+      });
+    } else {
+      const isIos = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+      if (isIos) {
+        alert("📲 আইফোনে ইনস্টল করার নিয়ম:\n\n১. নিচে থাকা Safari Share (শেয়ার) আইকনে চাপুন।\n২. মেনু থেকে 'Add to Home Screen' বেছে নিন।\n৩. উপরে 'Add' বাটনে চাপলেই হোম স্ক্রিনে অ্যাপ চলে আসবে!");
+      } else if (window.matchMedia('(display-mode: standalone)').matches) {
+        alert("✅ অ্যাপটি ইতিমধ্যে আপনার হোম স্ক্রিনে ইনস্টল করা আছে!");
+      } else {
+        alert("📲 হোম স্ক্রিনে ইনস্টল করার জন্য:\n\nব্রাউজারের ডানপাশের মেনু (তিনটি ডট ⋮) চাপুন এবং 'Add to Home screen' বা 'Install app' অপশনটি বেছে নিন!");
+      }
+    }
+  }
+
+  if (homeInstallBtn) homeInstallBtn.addEventListener('click', triggerPWAInstall);
+  if (settingsInstallBtn) settingsInstallBtn.addEventListener('click', triggerPWAInstall);
+
+  window.addEventListener('appinstalled', () => {
+    console.log('Hero app installed successfully');
+    deferredPrompt = null;
+    if (settingsInstallBadge) settingsInstallBadge.textContent = 'ইনস্টল হয়েছে';
   });
 
   // Initialize Drawer Grid

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>নায়ক জগৎ - ৯:১৬ রেশিওতে ৮০ জন কিংবদন্তি নায়ক | Hero Showcase</title>
+  <meta name="description" content="বাংলা ও ভারতীয় চলচ্চিত্রের সেরা ৮০ জন কিংবদন্তি নায়কের ছবি, জন্মদিন, পেশা ও আকর্ষণীয় তথ্যের মনকাড়া ৯:১৬ রেশিও অ্যানিমেটেড ওয়েব অ্যাপ।">
+  <meta name="theme-color" content="#0a0c14">
+
+  <!-- Google Fonts: Tiro Bangla for all Bengali text + Roboto for all numeric text & accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Animated Lighting Effects -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="ambient-orb orb-1" id="orb1"></div>
+    <div class="ambient-orb orb-2" id="orb2"></div>
+  </div>
+
+  <!-- Intro / Welcome Screen Modal (Home Screen with Settings) -->
+  <div class="intro-overlay" id="introOverlay">
+    <div class="intro-card-9-16">
+      <div class="intro-badge">
+        <span>✨</span> ৯:১৬ রিল শোকেস
+      </div>
+      
+      <div class="intro-collage">
+        <img src="assets/images/salman_shah.jpg" alt="সালমান শাহ" class="intro-avatar">
+        <img src="assets/images/shah_rukh_khan.jpg" alt="শাহরুখ খান" class="intro-avatar">
+        <img src="assets/images/amitabh_bachchan.jpg" alt="অমিতাভ বচ্চন" class="intro-avatar">
+        <img src="assets/images/shakib_khan.jpg" alt="শাকিব খান" class="intro-avatar">
+      </div>
+
+      <h2 class="intro-title"><span class="numeric">80</span> জন কিংবদন্তি নায়ক</h2>
+      <p class="intro-desc">
+        বাংলা ও ভারতীয় চলচ্চিত্রের ৮০ জন সেরা সুপারস্টার ও নায়কের ছবি, জন্মদিন, পেশা ও অন্যান্য তথ্য ৯:১৬ অনুপাতে একের পর এক উপভোগ করুন।
+      </p>
+
+      <!-- Home Screen Settings Toolbar -->
+      <div class="home-settings-toolbar">
+        <button class="home-setting-pill" id="homeSoundBtn" title="সাউন্ড টগল">
+          <span id="homeSoundIcon">🔊</span>
+          <span>সাউন্ড</span>
+        </button>
+
+        <button class="home-setting-pill" id="homeDrawerBtn" title="৮০ জন নায়কের পূর্ণাঙ্গ তালিকা">
+          <span>⊞</span>
+          <span>হিরো তালিকা</span>
+        </button>
+
+        <button class="home-setting-pill" id="homeFullscreenBtn" title="ফুলস্ক্রিন মোড">
+          <span>⛶</span>
+          <span>ফুলস্ক্রিন</span>
+        </button>
+      </div>
+
+      <button class="play-trigger-btn" id="startPlayBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <span>প্লে করুন (Play)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Settings Modal (Accessible anytime via gear button) -->
+  <div class="settings-modal-overlay" id="settingsModal" aria-hidden="true">
+    <div class="settings-card">
+      <div class="settings-card-header">
+        <h3><span>⚙️</span> সেটিংস ও অপশনস</h3>
+        <button class="close-settings-btn" id="closeSettingsBtn" aria-label="বন্ধ করুন">✕</button>
+      </div>
+
+      <div class="settings-options-list">
+        <!-- Sound Option -->
+        <button class="setting-row-btn" id="settingsSoundToggle">
+          <div class="setting-info">
+            <span class="setting-icon" id="settingsSoundIcon">🔊</span>
+            <div class="setting-texts">
+              <span class="setting-title">সাউন্ড ইফেক্টস</span>
+              <span class="setting-desc" id="settingsSoundDesc">অডিও অ্যানিমেশন সক্রিয়</span>
+            </div>
+          </div>
+          <span class="toggle-status-badge" id="settingsSoundStatus">অন</span>
+        </button>
+
+        <!-- 80 Heroes Grid Option -->
+        <button class="setting-row-btn" id="settingsDrawerTrigger">
+          <div class="setting-info">
+            <span class="setting-icon">⊞</span>
+            <div class="setting-texts">
+              <span class="setting-title">৮০ জন হিরোর তালিকা</span>
+              <span class="setting-desc">সরাসরি যে কাউকে পছন্দ করুন</span>
+            </div>
+          </div>
+          <span class="setting-arrow">❯</span>
+        </button>
+
+        <!-- Fullscreen Option -->
+        <button class="setting-row-btn" id="settingsFullscreenToggle">
+          <div class="setting-info">
+            <span class="setting-icon">⛶</span>
+            <div class="setting-texts">
+              <span class="setting-title">ফুলস্ক্রিন ভিউ</span>
+              <span class="setting-desc">সম্পূর্ণ স্ক্রিন জুড়ে উপভোগ করুন</span>
+            </div>
+          </div>
+          <span class="setting-arrow">❯</span>
+        </button>
+
+        <!-- Autoplay Toggle Option -->
+        <button class="setting-row-btn" id="settingsAutoplayToggle">
+          <div class="setting-info">
+            <span class="setting-icon" id="settingsPlayIcon">⏸</span>
+            <div class="setting-texts">
+              <span class="setting-title">অটো-প্লে ট্রানজিশন</span>
+              <span class="setting-desc" id="settingsPlayDesc">স্বয়ংক্রিয়ভাবে পরবর্তী হিরো আসবে</span>
+            </div>
+          </div>
+          <span class="toggle-status-badge" id="settingsPlayStatus">চলমান</span>
+        </button>
+
+        <!-- Return to Home Option -->
+        <button class="setting-row-btn" id="settingsHomeReturn">
+          <div class="setting-info">
+            <span class="setting-icon">🏠</span>
+            <div class="setting-texts">
+              <span class="setting-title">হোম স্ক্রিন</span>
+              <span class="setting-desc">শুরুর স্ক্রিনে ফিরে যান</span>
+            </div>
+          </div>
+          <span class="setting-arrow">❯</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outer Viewport Wrapper -->
+  <main class="app-viewport">
+    
+    <!-- 9:16 RATIO MAIN CONTAINER (TOPBAR HIDDEN AS REQUESTED) -->
+    <div class="reel-frame-9-16" id="heroCard">
+      
+      <!-- Top Autoplay Countdown Progress Bar -->
+      <div class="card-timer-bar" id="cardTimerBar"></div>
+
+      <!-- Upper Section: Hero Passport Photo (Inside 9:16 frame) -->
+      <div class="reel-photo-wrap">
+        <!-- Top Meta Row: Badge, Rank & Settings Gear -->
+        <div class="photo-meta-row">
+          <div class="hero-badge-tag" id="heroBadgeTag">
+            <span>👑</span>
+            <span id="heroBadgeText">রাজপুত্র</span>
+          </div>
+
+          <div class="meta-right-group">
+            <div class="hero-rank-index numeric" id="heroRankIndex">
+              <span class="numeric">01</span>/<span class="numeric">10</span>
+            </div>
+            
+            <!-- Discreet Floating Settings Gear Button -->
+            <button class="gear-btn" id="openSettingsBtn" title="সেটিংস ও মেনু" aria-label="সেটিংস">
+              ⚙️
+            </button>
+          </div>
+        </div>
+
+        <!-- Centered Passport Size Photo Frame (3.5 x 4.5 Ratio) -->
+        <div class="photo-frame passport-size" id="photoFrame">
+          <img src="assets/images/salman_shah.jpg" alt="নায়কের ছবি" class="hero-img animate-zoom" id="heroImg">
+        </div>
+      </div>
+
+      <!-- Lower Section: Information Cascade (Inside 9:16 frame) -->
+      <div class="reel-info-wrap">
+        
+        <!-- 1. Title & Main Name -->
+        <div class="hero-header-info anim-item" id="animHeader">
+          <div class="hero-title-tag">
+            <span class="star-icon">★</span>
+            <span id="heroTitle">বাংলা চলচ্চিত্রের রোমান্টিক রাজপুত্র</span>
+          </div>
+          <h2 class="hero-main-name">
+            <span id="heroNameBn">সালমান শাহ</span>
+            <span class="hero-en-name" id="heroNameEn">Salman Shah</span>
+          </h2>
+        </div>
+
+        <!-- 2. Clean Key Info Row: Birthday & Profession (Sequential Reveal) -->
+        <div class="clean-info-row">
+          <div class="clean-metric-pill anim-item" id="animBirthday">
+            <span class="pill-icon">🎂</span>
+            <div class="pill-body">
+              <span class="pill-label">জন্মদিন</span>
+              <span class="pill-val" id="heroBirthDate">১৯ সেপ্টেম্বর ১৯৭১</span>
+              <span class="pill-note" id="heroAge">২৫ বছর বয়সে প্রয়াণ</span>
+            </div>
+          </div>
+
+          <div class="clean-metric-pill anim-item" id="animProfession">
+            <span class="pill-icon">💼</span>
+            <div class="pill-body">
+              <span class="pill-label">পেশা</span>
+              <span class="pill-val" id="heroProfession">চলচ্চিত্র অভিনেতা</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Famous Movies / Works -->
+        <div class="movies-section anim-item" id="animMovies">
+          <div class="clean-section-header">
+            <span class="section-icon">🎞</span>
+            <span class="section-title">জনপ্রিয় সিনেমা</span>
+            <span class="debut-tag" id="heroDebut">কেয়ামত থেকে কেয়ামত</span>
+          </div>
+          <div class="movie-chips-wrap" id="movieChipsWrap">
+            <!-- Movie chips injected via JS -->
+          </div>
+        </div>
+
+        <!-- 4. Iconic Dialogue / Quote -->
+        <div class="dialogue-box anim-item" id="animDialogue">
+          <div class="dialogue-quote-mark">“</div>
+          <p class="dialogue-text" id="heroDialogue">
+            "ভালোবাসা কোনো বাধা মানে না, ভালোবাসা অমর!"
+          </p>
+          <span class="dialogue-label">স্মরণীয় সংলাপ</span>
+        </div>
+
+        <!-- 5. Achievements & Accolades -->
+        <div class="achievements-box anim-item" id="animAchievements">
+          <span class="trophy-icon">🏆</span>
+          <span class="achievements-text" id="heroAchievements">
+            মাত্র ৩ বছরে ২৭টি সর্বকালের অন্যতম সফল সিনেমা, ঢালিউডের ফ্যাশন বিপ্লব।
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Integrated Bottom Controller Bar: ONLY Next Button & Speed Up/Down Buttons -->
+      <nav class="reel-bottom-bar clean-bottom-bar" aria-label="কন্ট্রোল বার">
+        <!-- Speed Control Group: [-] Speed [+] -->
+        <div class="speed-control-group">
+          <button class="speed-step-btn" id="speedDownBtn" title="গতি কমান (ধীর)">
+            <span>−</span>
+          </button>
+          
+          <div class="speed-badge-wrap" title="বর্তমান অটো-প্লে গতি">
+            <span class="speed-badge-val numeric" id="speedDisplayVal">8s</span>
+          </div>
+          
+          <button class="speed-step-btn" id="speedUpBtn" title="গতি বাড়ান (দ্রুত)">
+            <span>+</span>
+          </button>
+        </div>
+
+        <!-- ONLY Next Button (Prominent & Clean) -->
+        <button class="clean-next-btn" id="nextBtn" title="পরবর্তী হিরো (Next Hero)">
+          <span>পরবর্তী</span>
+          <span class="next-arrow">⏭</span>
+        </button>
+      </nav>
+
+    </div>
+
+  </main>
+
+  <!-- All 10 Heroes Modal Drawer -->
+  <aside class="heroes-drawer-overlay" id="heroesDrawer" aria-hidden="true">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h2><span>🌟</span> ৮০ জন কিংবদন্তি নায়কের তালিকা</h2>
+        <button class="close-drawer-icon-btn" id="closeDrawerBtn" aria-label="বন্ধ করুন">✕</button>
+      </div>
+      <div class="drawer-grid" id="drawerGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </aside>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
